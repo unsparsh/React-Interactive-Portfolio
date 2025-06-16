@@ -8,10 +8,34 @@ import ShinyText from "../shiningButton/ShinyText/ShinyText.jsx";
 import Skills from "./components/Skills.jsx";
 import Footer from "./components/Footer.jsx";
 import Contact from "./components/Contact.jsx";
-import FuzzyText from "../FuzzeText/FuzzyText/FuzzyText.jsx";
+import Dock from "../dock/Dock/Dock.jsx";
+import { FaGithub , FaLinkedin , FaUser , FaInstagramSquare  } from "react-icons/fa";
+
 
 function App() {
   const [isMobile, setIsMobile] = useState(false);
+  const items = [
+    {
+      icon: <FaGithub  size={18} />,
+      label: "Github",
+      onClick: () => window.open("https://github.com/unsparsh", "_blank"),
+    },
+    {
+      icon: <FaLinkedin   size={18} />,
+      label: "LinkedIn",
+      onClick: () => window.open("https://linkedin.com/in/unsparsh", "_blank"),
+    },
+    {
+      icon: <FaUser    size={18} />,
+      label: "Portfolio",
+      onClick: () => window.open("https://sparshsingh.netlify.app/", "_blank"),
+    },
+    {
+      icon: <FaInstagramSquare     size={18} />,
+      label: "Instagram",
+      onClick: () => window.open("https://www.instagram.com/sparsh_chinsa/", "_blank"),
+    },
+  ];
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -24,25 +48,24 @@ function App() {
     return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
 
-if (isMobile) {
-  return (
-    <div className="h-screen w-screen bg-black text-white flex items-center justify-center p-6">
-      <div className="w-full max-w-sm text-center">
-        <h2 className="text-lg font-semibold mb-4">⚠️ Screen Too Small</h2>
-        <p className="text-sm leading-relaxed">
-          This website is designed for larger screens. <br />
-          Please access it on a <strong>laptop</strong> or a <strong>desktop</strong> for the best experience.
-        </p>
+  if (isMobile) {
+    return (
+      <div className="h-screen w-screen bg-black text-white flex items-center justify-center p-6">
+        <div className="w-full max-w-sm text-center">
+          <h2 className="text-lg font-semibold mb-4">⚠️ Screen Too Small</h2>
+          <p className="text-sm leading-relaxed">
+            This website is designed for larger screens. <br />
+            Please access it on a <strong>laptop</strong> or a{" "}
+            <strong>desktop</strong> for the best experience.
+          </p>
+        </div>
       </div>
-    </div>
-  );
-}
-
-
+    );
+  }
 
   return (
     <div className="bg-[#050506] text-white min-h-screen overflow-hidden">
-      {/* <SplashCursor /> */}
+      <SplashCursor />
       <div className="mt-3 bg-transparent">
         <Navbar />
       </div>
@@ -90,6 +113,12 @@ if (isMobile) {
       <div className="my-8 h-[1px] w-full bg-gradient-to-r from-transparent via-neutral-300 to-transparent dark:via-neutral-700" />
       <Contact />
       <Footer />
+      <Dock
+        items={items}
+        panelHeight={68}
+        baseItemSize={50}
+        magnification={70}
+      />
     </div>
   );
 }
