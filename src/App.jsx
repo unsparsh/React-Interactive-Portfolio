@@ -7,6 +7,7 @@ import ShinyText from "../shiningButton/ShinyText/ShinyText.jsx";
 import Skills from "./components/Skills.jsx";
 import Footer from "./components/Footer.jsx";
 import Contact from "./components/Contact.jsx";
+import Card from "./components/Card.jsx";
 
 function App() {
   return (
@@ -18,26 +19,28 @@ function App() {
       <div id="home">
         <Home />
       </div>
-<div className="my-8 h-[1px] w-full bg-gradient-to-r from-transparent via-neutral-300 to-transparent dark:via-neutral-700" />
-      <div id="about">
+      <div className="my-8 h-[1px] w-full bg-gradient-to-r from-transparent via-neutral-300 to-transparent dark:via-neutral-700" />
+      <div id="about" >
         <About />
       </div>
-<div className="my-8 h-[1px] w-full bg-gradient-to-r from-transparent via-neutral-300 to-transparent dark:via-neutral-700" />
+      <div className="my-8 h-[1px] w-full bg-gradient-to-r from-transparent via-neutral-300 to-transparent dark:via-neutral-700" />
       <div
         id="projects"
         className=" w-full overflow-hidden flex flex-col text-3xl  font-bold items-center justify-center h-20vh"
       >
+        
         <ShinyText
           text="Explore Projects here"
           disabled={false}
           speed={3}
           className="custom-class flex items-center justify-center h-20vh"
         />
+
         <br />
         <Projects />
       </div>
       <div className="my-8 h-[1px] w-full bg-gradient-to-r from-transparent via-neutral-300 to-transparent dark:via-neutral-700" />
-      
+
       <br />
       <div className="flex flex-col items-center justify-center text-3xl font-bold w-full">
         <ShinyText
@@ -52,8 +55,8 @@ function App() {
       <div className="my-8 h-[1px] w-full bg-gradient-to-r from-transparent via-neutral-300 to-transparent dark:via-neutral-700" />
 
       {/* Contact Form */}
-      <Contact/>
-
+      
+      <Contact />
       <Footer />
     </div>
   );
