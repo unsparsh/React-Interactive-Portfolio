@@ -22,7 +22,7 @@ const Projects = () => {
     description: 'This is pretty cool, right?'
   },
   {
-    image: '../../public/projectImages/image.png',
+    image: '../../projectImages/image.png',
     link: 'https://adorable-bienenstitch-f13054.netlify.app/',
     title: 'Parking Pass System',
     description: 'Smart app to generate, manage, and verify digital parking passes'

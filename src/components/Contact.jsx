@@ -3,12 +3,14 @@
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import emailjs from '@emailjs/browser';
-import { useRef } from 'react';
-import Card from "../components/Card.jsx"; // ✅ Import Card
+import emailjs from "@emailjs/browser";
+import { useRef, useState } from "react";
+import Card from "../components/Card.jsx";
+import Alert from "@mui/material/Alert";
 
 const Contact = () => {
   const form = useRef();
+  const [alert, setAlert] = useState({ message: "", severity: "" });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -19,67 +21,95 @@ const Contact = () => {
     const message = e.target.message.value.trim();
 
     if (!firstname || !lastname || !email || !message) {
-      alert("All fields are required!");
+      setAlert({ message: "All fields are required!", severity: "error" });
       return;
     }
 
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(email)) {
-      alert("Please enter a valid email address!");
+      setAlert({ message: "Please enter a valid email address!", severity: "error" });
       return;
     }
 
-    emailjs.send(
-      import.meta.env.VITE_SERVICE_ID_EMAILJS,
-      import.meta.env.VITE_TEMPLATE_ID_EMAILJS,
-      {
-        firstname,
-        lastname,
-        email,
-        message,
-      },
-      import.meta.env.VITE_PUBLIC_KEY_EMAILJS
-    )
+    emailjs
+      .send(
+        import.meta.env.VITE_SERVICE_ID_EMAILJS,
+        import.meta.env.VITE_TEMPLATE_ID_EMAILJS,
+        {
+          firstname,
+          lastname,
+          email,
+          message,
+        },
+        import.meta.env.VITE_PUBLIC_KEY_EMAILJS
+      )
       .then(() => {
-        alert("Message sent successfully!");
+        setAlert({ message: "Message sent successfully!", severity: "success" });
         e.target.reset();
       })
       .catch((error) => {
         console.error("Email sending error:", error);
-        alert("Failed to send message. Try again later.");
+        setAlert({ message: "Failed to send message. Try again later.", severity: "error" });
       });
   };
 
   return (
     <div className="w-full px-4 py-12 bg-[#050506] flex flex-col md:flex-row items-center justify-center gap-10">
-      
       {/* 👉 Contact Form */}
       <div className="shadow-input w-full max-w-md rounded-none bg-white p-4 md:rounded-2xl md:p-8 dark:bg-black">
         <h2 className="text-xl font-bold text-neutral-800 dark:text-neutral-200">
           Submit the Form
         </h2>
         <p className="mt-2 max-w-sm text-sm text-neutral-600 dark:text-neutral-300">
-          This form will make you enter my Gmail, and help you to send a secret message to me...
+          This form will make you enter my Gmail, and help you to send a secret
+          message to me...
         </p>
+
+        {/* 👉 Alert section */}
+        {alert.message && (
+          <Alert severity={alert.severity} className="my-4">
+            {alert.message}
+          </Alert>
+        )}
 
         <form className="my-8" ref={form} onSubmit={handleSubmit}>
           <div className="mb-4 flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-2">
             <LabelInputContainer>
               <Label htmlFor="firstname">First name</Label>
-              <Input id="firstname" name="firstname" placeholder="Hetal" type="text" />
+              <Input
+                id="firstname"
+                name="firstname"
+                placeholder="Hetal"
+                type="text"
+              />
             </LabelInputContainer>
             <LabelInputContainer>
               <Label htmlFor="lastname">Last name</Label>
-              <Input id="lastname" name="lastname" placeholder="Kumawat" type="text" />
+              <Input
+                id="lastname"
+                name="lastname"
+                placeholder="Kumawat"
+                type="text"
+              />
             </LabelInputContainer>
           </div>
           <LabelInputContainer className="mb-4">
             <Label htmlFor="email">Email Address</Label>
-            <Input id="email" name="email" placeholder="hetarsh@hs.com" type="email" />
+            <Input
+              id="email"
+              name="email"
+              placeholder="hetarsh@hs.com"
+              type="email"
+            />
           </LabelInputContainer>
           <LabelInputContainer className="mb-4">
             <Label htmlFor="message">Type your words here</Label>
-            <Input id="message" name="message" placeholder="No Abuse Please" type="text" />
+            <Input
+              id="message"
+              name="message"
+              placeholder="No Abuse Please"
+              type="text"
+            />
           </LabelInputContainer>
 
           <button
@@ -110,9 +140,7 @@ const BottomGradient = () => (
 );
 
 const LabelInputContainer = ({ children, className }) => (
-  <div className={cn("flex w-full flex-col space-y-2", className)}>
-    {children}
-  </div>
+  <div className={cn("flex w-full flex-col space-y-2", className)}>{children}</div>
 );
 
 export default Contact;
