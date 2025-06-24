@@ -84,13 +84,13 @@ function App() {
 
       <div
         id="projects"
-        className="w-full overflow-hidden flex flex-col text-3xl font-bold items-center justify-center h-20vh"
+        className="w-full overflow-hidden flex flex-col text-3xl font-bold items-center justify-center h-10vh"
       >
         <ShinyText
           text="Explore Projects here"
           disabled={false}
           speed={3}
-          className="custom-class flex items-center justify-center h-20vh"
+          className="custom-class flex items-center justify-center h-10vh"
         />
         <br />
         <Projects />
@@ -111,7 +111,8 @@ function App() {
       </div>
 
       <div className="my-8 h-[1px] w-full bg-gradient-to-r from-transparent via-neutral-300 to-transparent dark:via-neutral-700" />
-      <Contact />
+     <div id="contact"><Contact /></div>
+      
       <Footer />
       <Dock
         items={items}

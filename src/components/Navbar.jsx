@@ -1,4 +1,3 @@
-import React from 'react'
 import GooeyNav from './GooeyNav/GooeyNav.jsx';
 
 const Navbar = () => {
@@ -11,7 +10,7 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="h-20vh bg-[#0e0e10] flex justify-center" >
+    <div className="h-20vh  flex justify-center" >
       <GooeyNav
         items={Navitems}
         particleCount={15}
